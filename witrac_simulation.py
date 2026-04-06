@@ -782,52 +782,25 @@ with tab2:
     display_df['LastUpdate'] = display_df['LastUpdate'].apply(lambda x: x.strftime('%H:%M:%S'))
     display_df['TotalDistance'] = display_df['TotalDistance'].apply(lambda x: f"{x:.2f} km")
     
+
+
     # Color coding
-    def color_cells(val):
-        if val>50:
-            return "background-color:red"
+def color_cells(val):
+    try:
+        if float(val) < 30:
+            return 'background-color: #ff4b4b; color: white'
+        elif float(val) < 60:
+            return 'background-color: #ffa500; color: white'
         else:
-            return ""
-        
-        if col == 'Battery':
-            if val < battery_threshold:
-                return 'background-color: #ff4b4b; color: white'
-            elif val < 50:
-                return 'background-color: #ffa500; color: white'
             return 'background-color: #90EE90'
-        elif col == 'Temperature':
-            if val < temp_min or val > temp_max:
-                return 'background-color: #ff4b4b; color: white'
-            elif val < 30 or val > 33:
-                return 'background-color: #ffa500; color: white'
-            return 'background-color: #90EE90'
-        elif col == 'Activity':
-            if val < activity_threshold:
-                return 'background-color: #ff4b4b; color: white'
-            elif val < 40:
-                return 'background-color: #ffa500; color: white'
-            return 'background-color: #90EE90'
-        elif col == 'Hydration':
-            if val < hydration_threshold:
-                return 'background-color: #ff4b4b; color: white'
-            elif val < 60:
-                return 'background-color: #ffa500; color: white'
-            return 'background-color: #90EE90'
-        elif col == 'BodyCondition':
-            if val < 50:
-                return 'background-color: #ff4b4b; color: white'
-            elif val < 75:
-                return 'background-color: #ffa500; color: white'
-            return 'background-color: #90EE90'
+    except:
         return ''
-    
-    # Apply styling
-    styled_df = display_df.style
-    for col in ['Battery', 'Temperature', 'Activity', 'Hydration', 'BodyCondition']:
-        styled_df = df.style.applymap(color_cells)
-    
-    st.dataframe(styled_df, use_container_width=True, height=350)
-    
+
+# Apply styling
+styled_df = display_df.style.map(color_cells)
+
+# Display
+st.dataframe(styled_df, use_container_width=True, height=350)
     # Summary stats
     st.markdown("### 📊 Summary Statistics")
     col1, col2, col3, col4 = st.columns(4)
