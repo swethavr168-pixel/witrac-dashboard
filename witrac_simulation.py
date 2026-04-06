@@ -783,7 +783,12 @@ with tab2:
     display_df['TotalDistance'] = display_df['TotalDistance'].apply(lambda x: f"{x:.2f} km")
     
     # Color coding
-    def color_cells(val, col):
+    def color_cells(val):
+        if val>50:
+            return "background-color:red"
+        else:
+            return ""
+        
         if col == 'Battery':
             if val < battery_threshold:
                 return 'background-color: #ff4b4b; color: white'
@@ -819,7 +824,7 @@ with tab2:
     # Apply styling
     styled_df = display_df.style
     for col in ['Battery', 'Temperature', 'Activity', 'Hydration', 'BodyCondition']:
-        styled_df = styled_df.applymap(lambda x: color_cells(x, col), subset=[col])
+        styled_df = styled_df.applymap(lambda x: color_cells(x))
     
     st.dataframe(styled_df, use_container_width=True, height=350)
     
