@@ -804,39 +804,39 @@ st.dataframe(styled_df, use_container_width=True, height=350)
     # Summary stats
 st.markdown("### 📊 Summary Statistics")
 col1, col2, col3, col4 = st.columns(4)
-    with col1:
-        st.markdown("**Battery Distribution**")
-        fig = px.pie(values=[len(df_animals[df_animals['Battery']>70]),
+with col1:
+    st.markdown("**Battery Distribution**")
+    fig = px.pie(values=[len(df_animals[df_animals['Battery']>70]),
                              len(df_animals[(df_animals['Battery']<=70) & (df_animals['Battery']>30)]),
                              len(df_animals[df_animals['Battery']<=30])],
                      names=['Good (>70%)', 'Fair (30-70%)', 'Critical (<30%)'],
                      color_discrete_sequence=['#4CAF50', '#FFC107', '#F44336'])
-        st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, use_container_width=True)
     
-    with col2:
-        st.markdown("**Health Status**")
-        fig = px.pie(values=[len(df_animals[df_animals['Status']=='EXCELLENT']),
+with col2:
+    st.markdown("**Health Status**")
+    fig = px.pie(values=[len(df_animals[df_animals['Status']=='EXCELLENT']),
                              len(df_animals[df_animals['Status']=='NORMAL']),
                              len(df_animals[df_animals['Status']=='CRITICAL'])],
                      names=['Excellent', 'Normal', 'Critical'],
                      color_discrete_sequence=['#4CAF50', '#2196F3', '#F44336'])
-        st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, use_container_width=True)
     
-    with col3:
-        st.markdown("**Activity Levels**")
-        fig = px.bar(df_animals, x='Name', y='Activity',
+with col3:
+    st.markdown("**Activity Levels**")
+    fig = px.bar(df_animals, x='Name', y='Activity',
                     color='Activity',
                     color_continuous_scale='Viridis')
-        st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, use_container_width=True)
     
-    with col4:
-        st.markdown("**Temperature Range**")
-        fig = px.box(df_animals, y='Temperature',
+with col4:
+    st.markdown("**Temperature Range**")
+    fig = px.box(df_animals, y='Temperature',
                     title='Temperature Distribution',
                     points='all')
-        fig.add_hline(y=temp_min, line_dash="dash", line_color="red")
-        fig.add_hline(y=temp_max, line_dash="dash", line_color="red")
-        st.plotly_chart(fig, use_container_width=True)
+    fig.add_hline(y=temp_min, line_dash="dash", line_color="red")
+    fig.add_hline(y=temp_max, line_dash="dash", line_color="red")
+    st.plotly_chart(fig, use_container_width=True)
 
 # ===================== TAB 3: ANALYTICS =====================
 with tab3:
