@@ -803,8 +803,7 @@ styled_df = display_df.style.map(color_cells)
 st.dataframe(styled_df, use_container_width=True, height=350)
     # Summary stats
 st.markdown("### 📊 Summary Statistics")
-    col1, col2, col3, col4 = st.columns(4)
-    
+col1, col2, col3, col4 = st.columns(4)
     with col1:
         st.markdown("**Battery Distribution**")
         fig = px.pie(values=[len(df_animals[df_animals['Battery']>70]),
