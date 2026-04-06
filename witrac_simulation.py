@@ -802,7 +802,7 @@ styled_df = display_df.style.map(color_cells)
 # Display
 st.dataframe(styled_df, use_container_width=True, height=350)
     # Summary stats
-    st.markdown("### 📊 Summary Statistics")
+st.markdown("### 📊 Summary Statistics")
     col1, col2, col3, col4 = st.columns(4)
     
     with col1:
