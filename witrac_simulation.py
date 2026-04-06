@@ -824,7 +824,7 @@ with tab2:
     # Apply styling
     styled_df = display_df.style
     for col in ['Battery', 'Temperature', 'Activity', 'Hydration', 'BodyCondition']:
-        styled_df = styled_df.applymap(lambda x: color_cells(x))
+        styled_df = df.style.applymap(color_cells)
     
     st.dataframe(styled_df, use_container_width=True, height=350)
     
